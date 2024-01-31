@@ -11,6 +11,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody playerRb;
     private Animator playerAnim;
+    private bool isMoving;
+    private float dirX;
+    private float dirZ;
+
+    Vector3 movement;
 
     private void Start()
     {
@@ -28,19 +33,36 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = sprintPlayerSpeed;
             playerAnim.SetBool("isRunning", true);
         }
-        else if(Input.GetKeyUp(KeyCode.LeftShift))
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             currentSpeed = normalPlayerSpeed;
             playerAnim.SetBool("isRunning", false);
         }
+
+        else if (movement.magnitude < 0.1f)
+        {
+            playerAnim.SetBool("isRunning", false);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude < 0.1f)
+        {
+            playerAnim.SetTrigger("idleJumping");
+        }
+
+        else if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude > 0.1f)
+        {
+            playerAnim.SetTrigger("runJumping");
+        }
+
+
     }
 
     private void FixedUpdate()
     {
-        float dirX = Input.GetAxis("Horizontal");
-        float dirZ = Input.GetAxis("Vertical");
+        dirX = Input.GetAxis("Horizontal");
+        dirZ = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(dirX, 0f, dirZ).normalized;
+        movement = new Vector3(dirX, 0f, dirZ).normalized;
 
         // Kameranýn bakýþ yönünü al ve sadece yatay düzlemdeki bileþenleri kullan
         Vector3 cameraForward = Camera.main.transform.forward;
