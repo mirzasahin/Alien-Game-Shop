@@ -44,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude < 0.1f)
         {
             playerAnim.SetTrigger("idleJumping");
+            playerRb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
         }
 
         else if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude > 0.1f)
