@@ -39,10 +39,7 @@ public class PlayerMovement : MonoBehaviour
             playerAnim.SetBool("isRunning", false);
         }
 
-        else if (movement.magnitude < 0.1f)
-        {
-            playerAnim.SetBool("isRunning", false);
-        }
+        
 
         if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude < 0.1f)
         {
