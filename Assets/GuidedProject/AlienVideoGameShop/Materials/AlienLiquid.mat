@@ -8,18 +8,17 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: AlienLiquid
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 6edc81e290ca6af4a9681f1b336e5d1b,
+    type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _EMISSION
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
-  stringTagMap:
-    RenderType: Opaque
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -100,12 +99,15 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
+    - _GradientScales: 23.71
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
+    - _ScrollSpeed: 0.12
     - _Smoothness: 0.791
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -119,7 +121,9 @@ Material:
     - _BaseColor: {r: 0.76494026, g: 1, b: 0, a: 1}
     - _Color: {r: 0.76494026, g: 1, b: 0, a: 1}
     - _EmissionColor: {r: 0.05271925, g: 0.8962264, b: 0, a: 1}
+    - _RemapValues: {r: 0.1, g: 5, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _TintColor: {r: 0.08872169, g: 0.6886792, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &8613536726376631919
 MonoBehaviour:

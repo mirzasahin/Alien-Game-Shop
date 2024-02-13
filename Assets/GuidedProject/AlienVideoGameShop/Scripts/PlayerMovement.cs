@@ -12,8 +12,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRb;
     private Animator playerAnim;
     private bool isMoving;
+    public bool isGameStarted;
     private float dirX;
     private float dirZ;
+
+
+    [SerializeField] private UIManager UIManagerScript;
 
     Vector3 movement;
 
@@ -22,40 +26,28 @@ public class PlayerMovement : MonoBehaviour
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
 
-        Cursor.lockState = CursorLockMode.Locked;
         currentSpeed = normalPlayerSpeed;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+       
+
+        if(Camera.main != null && isGameStarted)
         {
-            currentSpeed = sprintPlayerSpeed;
-            playerAnim.SetBool("isRunning", true);
+            CharacterAnimations();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            currentSpeed = normalPlayerSpeed;
-            playerAnim.SetBool("isRunning", false);
-        }
-
-        
-
-        if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude < 0.1f)
-        {
-            playerAnim.SetTrigger("idleJumping");
-            playerRb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
-        }
-
-        else if(Input.GetKeyDown(KeyCode.Space) && movement.magnitude > 0.1f)
-        {
-            playerAnim.SetTrigger("runJumping");
-        }
-
-
     }
 
     private void FixedUpdate()
+    {
+        if(Camera.main != null && isGameStarted)
+        {
+            CharacterController();
+        }
+    }
+
+    private void CharacterController()
     {
         dirX = Input.GetAxis("Horizontal");
         dirZ = Input.GetAxis("Vertical");
@@ -72,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
         playerRb.velocity = rotatedMovement * currentSpeed * Time.fixedDeltaTime * 5;
 
         // Player Movement Animation
-        if(rotatedMovement.magnitude > 0.1f)
+        if (rotatedMovement.magnitude > 0.1f)
         {
             playerAnim.SetBool("isMoving", true);
         }
@@ -88,4 +80,39 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.fixedDeltaTime * 35);
         }
     }
+
+    private void CharacterAnimations()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            currentSpeed = sprintPlayerSpeed;
+            playerAnim.SetBool("isRunning", true);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            currentSpeed = normalPlayerSpeed;
+            playerAnim.SetBool("isRunning", false);
+        }
+
+
+
+        if (Input.GetKeyDown(KeyCode.Space) && movement.magnitude < 0.1f)
+        {
+            playerAnim.SetTrigger("idleJumping");
+            playerRb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+        }
+
+        else if (Input.GetKeyDown(KeyCode.Space) && movement.magnitude > 0.1f)
+        {
+            playerAnim.SetTrigger("runJumping");
+        }
+    }
+
+    public void GameStarter()
+    {
+        isGameStarted = true;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 }
+
+
