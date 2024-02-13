@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private float dirX;
     private float dirZ;
 
+    public GameObject startGameButton;
+
 
     [SerializeField] private UIManager UIManagerScript;
 
@@ -112,6 +114,14 @@ public class PlayerMovement : MonoBehaviour
     {
         isGameStarted = true;
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void StartGameButton()
+    {
+        if (!isGameStarted)
+        {
+            startGameButton.SetActive(true);
+        }
     }
 }
 
